@@ -25,6 +25,7 @@ function Register() {
 
   return (
     <Form name="basic" onFinish={onFinish}>
+      <h1>Реєстрація</h1>
       <Form.Item
         label="Ім'я"
         name="name"

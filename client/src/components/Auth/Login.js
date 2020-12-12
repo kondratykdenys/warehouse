@@ -2,7 +2,6 @@ import React, { useContext, useEffect } from "react"
 import { Link } from "react-router-dom"
 import { Button, Form, Input } from "antd"
 import { useHttp } from "../../hooks/http.hook"
-import ErrorMessage from "../../components/ErrorMessage"
 import { AuthContext } from "../../context/AuthContext"
 import { useMessage } from "../../hooks/message.hook"
 
@@ -26,6 +25,7 @@ function Register() {
 
   return (
     <Form name="basic" onFinish={onFinish}>
+      <h1>Вхід</h1>
       <Form.Item
         label="Email"
         name="email"
