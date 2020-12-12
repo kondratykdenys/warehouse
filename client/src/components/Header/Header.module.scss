@@ -1,0 +1,31 @@
+header {
+  nav {
+    padding: 20px 10px;
+    background-color: #d6d6d6;
+    box-shadow: 2px 0 20px 0 #6b6b6b;
+
+    ul {
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      list-style: none;
+      margin: 0;
+
+      li {
+        a {
+          color: #262626;
+        }
+
+        button span {
+          color: #262626;
+          transition: color .3s;
+
+          &:hover {
+            color: #1890ff;
+          }
+        }
+      }
+    }
+  }
+}

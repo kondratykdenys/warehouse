@@ -5,10 +5,10 @@ import Login from "../components/Auth/Login"
 
 function AuthPage() {
   return (
-    <div className="container">
+    <div className='center'>
       <Switch>
         <Route path="/register" component={Register} />
-        <Route path="/" component={Login} />
+        <Route path="/" exect component={Login} />
       </Switch>
     </div>
   )

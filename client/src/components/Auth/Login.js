@@ -4,6 +4,7 @@ import { Button, Form, Input } from "antd"
 import { useHttp } from "../../hooks/http.hook"
 import { AuthContext } from "../../context/AuthContext"
 import { useMessage } from "../../hooks/message.hook"
+import styles from './Auth.module.scss'
 
 function Register() {
   const auth = useContext(AuthContext)
@@ -24,21 +25,27 @@ function Register() {
   }
 
   return (
-    <Form name="basic" onFinish={onFinish}>
+    <Form
+      name="basic"
+      onFinish={onFinish}
+      className={styles.form}
+      layout="vertical"
+    >
       <h1>Вхід</h1>
       <Form.Item
         label="Email"
         name="email"
         rules={[{ required: true, message: "Введіть ваш Email!" }]}
       >
-        <Input style={{ width: "400px" }} type="email" name="email" />
+        <Input type="email" name="email" />
       </Form.Item>
+
       <Form.Item
         label="Пароль"
         name="password"
         rules={[{ required: true, message: "Введіть ваш пароль!" }]}
       >
-        <Input style={{ width: "400px" }} type="password" name="password" />
+        <Input type="password" name="password" />
       </Form.Item>
       <Form.Item>
         <Button type="primary" htmlType="submit" disabled={loading}>
