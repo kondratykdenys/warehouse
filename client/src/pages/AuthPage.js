@@ -5,7 +5,7 @@ import Login from "../components/Auth/Login"
 
 function AuthPage() {
   return (
-    <div className='center'>
+    <div className="center">
       <Switch>
         <Route path="/register" component={Register} />
         <Route path="/" exect component={Login} />

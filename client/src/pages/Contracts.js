@@ -1,11 +1,11 @@
 import React from "react"
-import { Empty } from 'antd'
+import { Empty } from "antd"
 
 function Contracts() {
   return (
-    <div className='center'>
+    <div className="center">
       <h1>Контракти</h1>
-      <Empty description={false}/>
+      <Empty description={false} />
     </div>
   )
 }

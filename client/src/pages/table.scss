@@ -1,0 +1,24 @@
+.table {
+  max-width: 1200px;
+  margin: 0 auto;
+
+  h1 {
+    text-align: center;
+    padding: 10px 0;
+  }
+
+  form {
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .addNew {
+    margin: 0 auto;
+    display: inherit;
+  }
+
+  .ant-table-wrapper {
+    margin-top: 30px;
+  }
+}

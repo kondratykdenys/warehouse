@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect} from "react"
+import { useCallback, useState, useEffect } from "react"
 
 const storageName = "userData"
 
@@ -25,7 +25,6 @@ export const useAuth = () => {
 
     localStorage.removeItem(storageName)
   }, [])
-
 
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem(storageName))

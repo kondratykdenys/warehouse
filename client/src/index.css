@@ -38,3 +38,8 @@ code {
   align-items: center;
   flex-direction: column;
 }
+
+.active {
+  color: #40a9ff;
+  border-bottom: 1px solid #40a9ff;
+}

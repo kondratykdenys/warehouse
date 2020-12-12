@@ -15,11 +15,12 @@ header {
       li {
         a {
           color: #262626;
+          padding: 5px;
         }
 
         button span {
           color: #262626;
-          transition: color .3s;
+          transition: color 0.3s;
 
           &:hover {
             color: #1890ff;

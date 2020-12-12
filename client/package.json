@@ -37,6 +37,7 @@
     "prettier": "2.2.1"
   },
   "prettier": {
-    "arrowParens": "avoid"
+    "arrowParens": "avoid",
+    "semi": false
   }
 }

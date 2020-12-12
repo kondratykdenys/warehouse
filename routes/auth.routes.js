@@ -31,7 +31,9 @@ router.post(
       const candidate = await User.findOne({ where: { email } })
 
       if (candidate) {
-        return res.status(400).json({ message: "Користувач з таким email-ом вже існує" })
+        return res
+          .status(400)
+          .json({ message: "Користувач з таким email-ом вже існує" })
       }
 
       const hashedPassword = await bcrypt.hash(password, 15)

@@ -12,13 +12,13 @@ export const useRoutes = isAuthenticated => {
   if (isAuthenticated) {
     return (
       <React.Fragment>
-        <Header/>
+        <Header />
         <Switch>
-          <Route path="/clients" component={Clients}/>
-          <Route path="/contracts" component={Contracts}/>
-          <Route path="/ttns" component={Ttn}/>
-          <Route path="/products" component={Products}/>
-          <Route path="/containers" component={Containers}/>
+          <Route path="/clients" component={Clients} />
+          <Route path="/contracts" component={Contracts} />
+          <Route path="/ttns" component={Ttn} />
+          <Route path="/products" component={Products} />
+          <Route path="/containers" component={Containers} />
           <Redirect to="/products" />
         </Switch>
       </React.Fragment>
@@ -27,7 +27,7 @@ export const useRoutes = isAuthenticated => {
 
   return (
     <Switch>
-      <Route to="/" component={AuthPage}/>
+      <Route to="/" component={AuthPage} />
       <Redirect to="" />
     </Switch>
   )

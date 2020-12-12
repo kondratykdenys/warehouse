@@ -4,7 +4,7 @@ import { Button, Form, Input } from "antd"
 import { useHttp } from "../../hooks/http.hook"
 import { AuthContext } from "../../context/AuthContext"
 import { useMessage } from "../../hooks/message.hook"
-import styles from './Auth.module.scss'
+import styles from "./Auth.module.scss"
 
 function Register() {
   const auth = useContext(AuthContext)
