@@ -12,6 +12,7 @@ app.use("/api/auth", require("./routes/auth.routes"))
 app.use("/api/client", require("./routes/clients.routes"))
 app.use("/api/product", require("./routes/products.routes"))
 app.use("/api/container", require("./routes/containers.routes"))
+app.use("/api/user", require("./routes/users.routes"))
 
 const PORT = process.env.PORT || 3306
 

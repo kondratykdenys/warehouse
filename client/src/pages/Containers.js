@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import { useHttp } from "../hooks/http.hook"
 import { useMessage } from "../hooks/message.hook"
+import { AuthContext } from "../context/AuthContext"
 import AllContainers from "../components/Containers/AllContainers"
 import AddNewContainer from "../components/Containers/AddNewContainer"
 import "./table.scss"
 
 function Containers() {
+  const { userIsChief } = useContext(AuthContext)
   const [containers, setContainers] = useState([])
   const { loading, request, error, clearError } = useHttp()
 
@@ -33,11 +35,12 @@ function Containers() {
   return (
     <div className="table">
       <h1>Тара</h1>
-      <AddNewContainer refresh={refresh} />
+      {userIsChief ? <AddNewContainer refresh={refresh} /> : ""}
       <AllContainers
         removeById={removeById}
         containers={containers}
         refresh={refresh}
+        userIsChief={userIsChief}
       />
     </div>
   )

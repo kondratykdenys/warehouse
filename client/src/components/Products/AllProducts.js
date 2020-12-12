@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { Table, Tag, Space, Alert } from "antd"
 
-function AllProducts({ removeById, products, refresh }) {
+function AllProducts({ removeById, products, refresh, userIsChief }) {
   const columns = [
     {
       title: "Назва",
@@ -15,7 +15,10 @@ function AllProducts({ removeById, products, refresh }) {
       key: "price",
       align: "center",
     },
-    {
+  ]
+
+  if (userIsChief) {
+    columns.push({
       title: "Дія",
       key: "action",
       align: "center",
@@ -28,8 +31,8 @@ function AllProducts({ removeById, products, refresh }) {
           Видалити продукт {record.name}{" "}
         </a>
       ),
-    },
-  ]
+    })
+  }
 
   return (
     <Table

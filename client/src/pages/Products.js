@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import { useHttp } from "../hooks/http.hook"
 import { useMessage } from "../hooks/message.hook"
+import { AuthContext } from "../context/AuthContext"
 import AllProducts from "../components/Products/AllProducts"
 import AddNewProduct from "../components/Products/AddNewProduct"
 import "./table.scss"
 
 function Products() {
+  const { userIsChief } = useContext(AuthContext)
   const [products, setProducts] = useState([])
   const { loading, request, error, clearError } = useHttp()
 
@@ -33,11 +35,12 @@ function Products() {
   return (
     <div className="table">
       <h1>Товари</h1>
-      <AddNewProduct refresh={refresh} />
+      {userIsChief ? <AddNewProduct refresh={refresh} /> : ""}
       <AllProducts
         removeById={removeById}
         products={products}
         refresh={refresh}
+        userIsChief={userIsChief}
       />
     </div>
   )

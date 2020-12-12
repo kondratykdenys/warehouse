@@ -6,7 +6,7 @@ import { AuthContext } from "./context/AuthContext"
 function App() {
   const { token, login, logout, userIsChief } = useAuth()
   const isAuthenticated = !!token
-  const routes = useRoutes(isAuthenticated)
+  const routes = useRoutes(isAuthenticated, userIsChief)
   return (
     <AuthContext.Provider
       value={{ token, login, logout, userIsChief, isAuthenticated }}

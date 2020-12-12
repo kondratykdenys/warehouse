@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { Table, Tag, Space, Alert } from "antd"
 
-function AllClients({ removeById, clients, refresh }) {
+function AllClients({ removeById, clients, refresh, userIsChief }) {
   const columns = [
     {
       title: "Ім`я",
@@ -15,7 +15,10 @@ function AllClients({ removeById, clients, refresh }) {
       key: "lastName",
       align: "center",
     },
-    {
+  ]
+
+  if (userIsChief) {
+    columns.push({
       title: "Дія",
       key: "action",
       align: "center",
@@ -28,8 +31,8 @@ function AllClients({ removeById, clients, refresh }) {
           Видалити клієнта {record.name}{" "}
         </a>
       ),
-    },
-  ]
+    })
+  }
 
   return (
     <Table

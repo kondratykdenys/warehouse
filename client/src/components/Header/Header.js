@@ -5,13 +5,19 @@ import { AuthContext } from "../../context/AuthContext"
 import "./Header.module.scss"
 
 function Header() {
-  const auth = useContext(AuthContext)
+  const { logout, userIsChief } = useContext(AuthContext)
 
   return (
     <header>
       <nav>
         <ul>
-          {/*<li><NavLink to="/">Домашня сторінка</NavLink></li>*/}
+          {
+            userIsChief ? (
+              <li>
+                <NavLink to="/users">Працівники</NavLink>
+              </li>
+            ) : ''
+          }
           <li>
             <NavLink to="/clients">Клієнти</NavLink>
           </li>
@@ -28,7 +34,7 @@ function Header() {
             <NavLink to="/containers">Тара</NavLink>
           </li>
           <li>
-            <Button type="link" onClick={auth.logout}>
+            <Button type="link" onClick={logout}>
               Вийти
             </Button>
           </li>

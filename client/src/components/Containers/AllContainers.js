@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { Table, Tag, Space, Alert } from "antd"
 
-function AllContainers({ removeById, containers, refresh }) {
+function AllContainers({ removeById, containers, refresh, userIsChief }) {
   const columns = [
     {
       title: "Назва",
@@ -15,7 +15,10 @@ function AllContainers({ removeById, containers, refresh }) {
       key: "price",
       align: "center",
     },
-    {
+  ]
+
+  if (userIsChief) {
+    columns.push({
       title: "Дія",
       key: "action",
       align: "center",
@@ -28,8 +31,8 @@ function AllContainers({ removeById, containers, refresh }) {
           Видалити тару {record.name}{" "}
         </a>
       ),
-    },
-  ]
+    })
+  }
 
   return (
     <Table
