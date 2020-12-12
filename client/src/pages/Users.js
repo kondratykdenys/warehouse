@@ -27,10 +27,7 @@ function Users() {
   return (
     <div className="table">
       <h1>Працівники</h1>
-      <AllUsers
-        users={users}
-        refresh={refresh}
-      />
+      <AllUsers users={users} refresh={refresh} />
     </div>
   )
 }

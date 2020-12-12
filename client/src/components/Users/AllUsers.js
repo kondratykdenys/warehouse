@@ -3,7 +3,6 @@ import { useHttp } from "../../hooks/http.hook"
 import { Table, Tag, Space, Alert, Checkbox } from "antd"
 
 function AllUsers({ users, refresh }) {
-
   const { loading, request } = useHttp()
 
   const updateUser = async id => {
@@ -36,20 +35,13 @@ function AllUsers({ users, refresh }) {
       key: "isChief",
       align: "center",
       render: (cheched, record) => (
-        <Checkbox
-          checked={cheched}
-          onChange={() => updateUser(record.id)}
-        />
-      )
+        <Checkbox checked={cheched} onChange={() => updateUser(record.id)} />
+      ),
     },
   ]
 
   return (
-    <Table
-      columns={columns}
-      dataSource={users}
-      pagination={{ pageSize: 10 }}
-    />
+    <Table columns={columns} dataSource={users} pagination={{ pageSize: 10 }} />
   )
 }
 

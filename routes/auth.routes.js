@@ -42,9 +42,19 @@ router.post(
         lastName,
         email,
         password: hashedPassword,
+        isChief: false,
       })
 
-      res.status(200).json({ user, message: "Користувач зареєстрований" })
+      const token = jwt.sign(
+        {
+          userId: user.id,
+          userIsChief: user.isChief,
+        },
+        config.get("jwtToken"),
+        { expiresIn: "1h" }
+      )
+
+      res.json({ token, userIsChief: user.isChief })
     } catch (e) {
       res.status(500).json({
         error: e.message,

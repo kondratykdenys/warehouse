@@ -11,13 +11,13 @@ function Header() {
     <header>
       <nav>
         <ul>
-          {
-            userIsChief ? (
-              <li>
-                <NavLink to="/users">Працівники</NavLink>
-              </li>
-            ) : ''
-          }
+          {userIsChief ? (
+            <li>
+              <NavLink to="/users">Працівники</NavLink>
+            </li>
+          ) : (
+            ""
+          )}
           <li>
             <NavLink to="/clients">Клієнти</NavLink>
           </li>

@@ -1,4 +1,4 @@
-import React  from "react"
+import React from "react"
 import { Switch, Route, Redirect } from "react-router-dom"
 import Header from "./components/Header/Header"
 import AuthPage from "./pages/AuthPage"
@@ -15,9 +15,7 @@ export const useRoutes = (isAuthenticated, userIsChief) => {
       <React.Fragment>
         <Header />
         <Switch>
-          {
-            userIsChief ?  <Route path="/users" component={Users} /> : ''
-          }
+          {userIsChief ? <Route path="/users" component={Users} /> : ""}
           <Route path="/clients" component={Clients} />
           <Route path="/contracts" component={Contracts} />
           <Route path="/ttns" component={Ttn} />

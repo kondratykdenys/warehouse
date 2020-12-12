@@ -23,7 +23,6 @@ router.get("/get-all", async (req, res) => {
 
 router.post("/update/:id", async (req, res) => {
   try {
-
     const { id } = req.params
 
     const user = await User.findByPk(id)
@@ -31,10 +30,10 @@ router.post("/update/:id", async (req, res) => {
     if (user) {
       user.isChief = !user.isChief
       user.save()
-      return res.json({message: 'Права змінено.'})
+      return res.json({ message: "Права змінено." })
     }
 
-    return res.status(200).json({message: 'Працівника не знайдено.'})
+    return res.status(200).json({ message: "Працівника не знайдено." })
   } catch (e) {
     res.status(500).json({
       error: e.message,
@@ -42,6 +41,5 @@ router.post("/update/:id", async (req, res) => {
     })
   }
 })
-
 
 module.exports = router
