@@ -40,8 +40,13 @@ function AllUsers({ users, refresh }) {
     },
   ]
 
+  const data = users.map(user => ({
+    ...user,
+    key: user.id,
+  }))
+
   return (
-    <Table columns={columns} dataSource={users} pagination={{ pageSize: 10 }} />
+    <Table columns={columns} dataSource={data} pagination={{ pageSize: 10 }} />
   )
 }
 

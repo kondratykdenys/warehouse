@@ -23,5 +23,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   )
 
+  Product.associate = models => {
+    Product.hasMany(models.Contract, { as: "product", foreignKey: "id" })
+  }
+
   return Product
 }

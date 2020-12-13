@@ -1,14 +1,6 @@
 import React from "react"
-import { Empty } from "antd"
 import { Table, Badge, Menu, Dropdown, Space } from "antd"
 import { DownOutlined } from "@ant-design/icons"
-
-const menu = (
-  <Menu>
-    <Menu.Item>Action 1</Menu.Item>
-    <Menu.Item>Action 2</Menu.Item>
-  </Menu>
-)
 
 function Ttn() {
   const expandedRowRender = () => {
@@ -34,11 +26,6 @@ function Ttn() {
           <Space size="middle">
             <a>Pause</a>
             <a>Stop</a>
-            <Dropdown overlay={menu}>
-              <a>
-                More <DownOutlined />
-              </a>
-            </Dropdown>
           </Space>
         ),
       },

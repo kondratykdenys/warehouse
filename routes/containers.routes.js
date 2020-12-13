@@ -21,6 +21,24 @@ router.get("/get-all", async (req, res) => {
   }
 })
 
+router.get("/get/:id", async (req, res) => {
+  try {
+    const { id } = req.params
+    const container = await Container.findByPk(id)
+
+    if (!container) {
+      return res.status(400).json({ message: "Такої тари не існує." })
+    }
+
+    return res.json(container)
+  } catch (e) {
+    res.status(500).json({
+      error: e.message,
+      message: "Сталася помилка. Спробуйте знову.",
+    })
+  }
+})
+
 router.post("/add", async (req, res) => {
   try {
     const body = req.body

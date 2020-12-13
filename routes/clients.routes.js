@@ -20,6 +20,23 @@ router.get("/get-all", async (req, res) => {
     })
   }
 })
+router.get("/get/:id", async (req, res) => {
+  try {
+    const { id } = req.params
+    const client = await Client.findByPk(id)
+
+    if (!client) {
+      return res.status(404).json({ message: "Клієнта не знайдено." })
+    }
+
+    return res.json(client)
+  } catch (e) {
+    res.status(500).json({
+      error: e.message,
+      message: "Сталася помилка. Спробуйте знову.",
+    })
+  }
+})
 
 router.post("/add", async (req, res) => {
   try {

@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-  const Container = sequelize.define(
-    "Container",
+  const Ttn = sequelize.define(
+    "Ttn",
     {
       id: {
         type: DataTypes.INTEGER,
@@ -8,20 +8,28 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         allowNull: false,
       },
-      name: {
-        type: DataTypes.STRING,
+      contract: {
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
-      price: {
+      count: {
         type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      departure: {
+        type: DataTypes.DATE,
         allowNull: false,
       },
     },
     {
-      tableName: "containers",
+      tableName: "ttns",
       timestamps: false,
     }
   )
 
-  return Container
+  Ttn.associate = models => {
+    Ttn.belongsTo(models.Contract, { as: "ttn", foreignKey: "contract" })
+  }
+
+  return Ttn
 }

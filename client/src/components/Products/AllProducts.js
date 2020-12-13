@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+import { NavLink } from "react-router-dom"
 import { Table, Tag, Space, Alert } from "antd"
 
 function AllProducts({ removeById, products, refresh, userIsChief }) {
@@ -8,6 +9,9 @@ function AllProducts({ removeById, products, refresh, userIsChief }) {
       dataIndex: "name",
       key: "name",
       align: "center",
+      render: (text, render) => (
+        <NavLink to={`/product/${render.id}`}>{text}</NavLink>
+      ),
     },
     {
       title: "Ціна",
@@ -34,12 +38,13 @@ function AllProducts({ removeById, products, refresh, userIsChief }) {
     })
   }
 
+  const data = products.map(product => ({
+    ...product,
+    key: product.id,
+  }))
+
   return (
-    <Table
-      columns={columns}
-      dataSource={products}
-      pagination={{ pageSize: 10 }}
-    />
+    <Table columns={columns} dataSource={data} pagination={{ pageSize: 10 }} />
   )
 }
 

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+import { NavLink } from "react-router-dom"
 import { Table, Tag, Space, Alert } from "antd"
 
 function AllClients({ removeById, clients, refresh, userIsChief }) {
@@ -8,6 +9,9 @@ function AllClients({ removeById, clients, refresh, userIsChief }) {
       dataIndex: "name",
       key: "name",
       align: "center",
+      render: (text, render) => (
+        <NavLink to={`/client/${render.id}`}>{text}</NavLink>
+      ),
     },
     {
       title: "Прізвище",
@@ -34,12 +38,13 @@ function AllClients({ removeById, clients, refresh, userIsChief }) {
     })
   }
 
+  const data = clients.map(client => ({
+    ...client,
+    key: client.id,
+  }))
+
   return (
-    <Table
-      columns={columns}
-      dataSource={clients}
-      pagination={{ pageSize: 10 }}
-    />
+    <Table columns={columns} dataSource={data} pagination={{ pageSize: 10 }} />
   )
 }
 

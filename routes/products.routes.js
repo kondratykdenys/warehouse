@@ -21,6 +21,24 @@ router.get("/get-all", async (req, res) => {
   }
 })
 
+router.get("/get/:id", async (req, res) => {
+  try {
+    const { id } = req.params
+    const product = await Product.findByPk(id)
+
+    if (!product) {
+      return res.status(404).json({ message: "Не існує такого продукту" })
+    }
+
+    return res.json(product)
+  } catch (e) {
+    res.status(500).json({
+      error: e.message,
+      message: "Сталася помилка. Спробуйте знову.",
+    })
+  }
+})
+
 router.post("/add", async (req, res) => {
   try {
     const body = req.body
