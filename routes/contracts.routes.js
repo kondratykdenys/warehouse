@@ -73,7 +73,7 @@ router.get("/get-query/:query", async (req, res) => {
 
     const filteredContracts = contracts.filter(contract => {
       if (
-        contract.id == query ||
+        (contract.id == query ||
         (contract.client &&
           contract.client.name &&
           contract.client.name.toLowerCase().indexOf(query) === 0) ||
@@ -86,7 +86,7 @@ router.get("/get-query/:query", async (req, res) => {
         (contract.Container &&
           contract.Container.name &&
           contract.Container.name.toLowerCase().indexOf(query) === 0) ||
-        contract.dateOfAssebly.indexOf(query) === 0
+        contract.dateOfAssebly.indexOf(query) === 0) && contract.countOfProduct > contract.status
       ) {
         return contract
       }

@@ -27,7 +27,16 @@ router.post("/add", async (req, res) => {
   try {
     const body = req.body
 
-    await Ttn.create(body)
+    const ttn = await Ttn.create(body)
+
+    const Contract = require("../models/index").Contract
+
+    contract = await Contract.findByPk(body.contract)
+
+    contract.status = parseInt(body.count) + parseInt(contract.status)
+
+    contract.save()
+    ttn.save()
 
     return res.json({ message: "Товарну накладну додано." })
   } catch (e) {
