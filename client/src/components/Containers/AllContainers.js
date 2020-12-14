@@ -14,7 +14,7 @@ function AllContainers({ removeById, containers, refresh, userIsChief }) {
       ),
     },
     {
-      title: "Ціна",
+      title: "Ціна/грн.",
       dataIndex: "price",
       key: "price",
       align: "center",

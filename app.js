@@ -1,5 +1,4 @@
 const express = require("express")
-const config = require("config")
 const bodyParser = require("body-parser")
 const db = require("./models")
 const path = require("path")
@@ -13,6 +12,7 @@ app.use("/api/client", require("./routes/clients.routes"))
 app.use("/api/product", require("./routes/products.routes"))
 app.use("/api/container", require("./routes/containers.routes"))
 app.use("/api/contract", require("./routes/contracts.routes"))
+app.use("/api/ttn", require("./routes/ttns.routes"))
 app.use("/api/user", require("./routes/users.routes"))
 
 const PORT = process.env.PORT || 3306

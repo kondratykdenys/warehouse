@@ -39,6 +39,30 @@ router.get("/get/:id", async (req, res) => {
   }
 })
 
+router.get("/get-name/:name", async (req, res) => {
+  try {
+    const { name } = req.params
+    const containers = await Container.findAll()
+
+    if (!containers) {
+      return res.status(404).json({ message: "Продукт не знайдено." })
+    }
+
+    const filterContainers = containers.filter(container => {
+      if (container.name.toLowerCase().indexOf(name.toLowerCase()) == 0) {
+        return container
+      }
+    })
+
+    return res.json(filterContainers)
+  } catch (e) {
+    res.status(500).json({
+      error: e.message,
+      message: "Сталася помилка. Спробуйте знову.",
+    })
+  }
+})
+
 router.post("/add", async (req, res) => {
   try {
     const body = req.body

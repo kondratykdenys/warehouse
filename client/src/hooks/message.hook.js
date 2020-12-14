@@ -4,7 +4,7 @@ import { message } from "antd"
 export const useMessage = () => {
   return useCallback(error => {
     if (error) {
-      message.error(error, 10)
+      message.error(error)
     }
   }, [])
 }

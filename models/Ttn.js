@@ -20,6 +20,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.DATE,
         allowNull: false,
       },
+      address: {
+        type: DataTypes.CHAR,
+        default: "Відсутня інформація",
+      },
     },
     {
       tableName: "ttns",
@@ -28,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
   )
 
   Ttn.associate = models => {
-    Ttn.belongsTo(models.Contract, { as: "ttn", foreignKey: "contract" })
+    Ttn.belongsTo(models.Contract, { as: "ttn", foreignKey: "id" })
   }
 
   return Ttn

@@ -3,6 +3,7 @@ import { AuthContext } from "../context/AuthContext"
 import { useHttp } from "../hooks/http.hook"
 import { useMessage } from "../hooks/message.hook"
 import AllContacts from "../components/Contracts/AllContracts"
+import AddNewContract from "../components/Contracts/AddNewContract"
 
 function Contracts() {
   const { userIsChief } = useContext(AuthContext)
@@ -10,6 +11,11 @@ function Contracts() {
   const { loading, request, error, clearError } = useHttp()
 
   const message = useMessage()
+
+  const refresh = async () => {
+    const newData = await request("/api/contract/get-all")
+    setContracts(newData.reverse())
+  }
 
   useEffect(() => {
     refresh()
@@ -20,15 +26,11 @@ function Contracts() {
     clearError()
   }, [message, error])
 
-  const refresh = async () => {
-    const newData = await request("/api/contract/get-all")
-    setContracts(newData.reverse())
-  }
-
   return (
     <div className="table">
       <h1>Контракти</h1>
-      <AllContacts contracts={contracts} />
+      {userIsChief ? <AddNewContract refresh={refresh} /> : ""}
+      <AllContacts contracts={contracts} loading={loading} />
     </div>
   )
 }

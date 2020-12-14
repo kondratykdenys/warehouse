@@ -39,6 +39,30 @@ router.get("/get/:id", async (req, res) => {
   }
 })
 
+router.get("/get-name/:name", async (req, res) => {
+  try {
+    const { name } = req.params
+    const products = await Product.findAll()
+
+    if (!products) {
+      return res.status(404).json({ message: "Продукт не знайдено." })
+    }
+
+    const filterProducts = products.filter(product => {
+      if (product.name.toLowerCase().indexOf(name.toLowerCase()) == 0) {
+        return product
+      }
+    })
+
+    return res.json(filterProducts)
+  } catch (e) {
+    res.status(500).json({
+      error: e.message,
+      message: "Сталася помилка. Спробуйте знову.",
+    })
+  }
+})
+
 router.post("/add", async (req, res) => {
   try {
     const body = req.body

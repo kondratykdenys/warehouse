@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       status: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        default: "0",
       },
     },
     {
@@ -48,7 +48,7 @@ module.exports = (sequelize, DataTypes) => {
     Contract.belongsTo(models.Container, {
       foreignKey: "container",
     })
-    Contract.hasMany(models.Ttn, { as: "ttn", foreignKey: "id" })
+    Contract.hasMany(models.Ttn, { as: "ttn", foreignKey: "contract" })
   }
 
   return Contract

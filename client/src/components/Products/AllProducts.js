@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react"
 import { NavLink } from "react-router-dom"
-import { Table, Tag, Space, Alert } from "antd"
+import { Table } from "antd"
 
-function AllProducts({ removeById, products, refresh, userIsChief }) {
+function AllProducts({ products, userIsChief }) {
   const columns = [
     {
       title: "Назва",
@@ -14,7 +14,7 @@ function AllProducts({ removeById, products, refresh, userIsChief }) {
       ),
     },
     {
-      title: "Ціна",
+      title: "Ціна/грн.",
       dataIndex: "price",
       key: "price",
       align: "center",

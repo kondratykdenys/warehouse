@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom"
 import { Table, Badge, Menu, Dropdown, Space, Tag } from "antd"
 import { DownOutlined } from "@ant-design/icons"
 
-function AllContracts({ contracts }) {
+function AllContracts({ contracts, loading }) {
   const expandedRowRender = contract => {
     const columns = [
       {
@@ -125,13 +125,13 @@ function AllContracts({ contracts }) {
       name:
         contract.status == 0
           ? "Не виконано"
-          : contract.status == "1"
+          : contract.status < contract.countOfProduct
           ? "В процесі"
           : "Виконанно",
       color:
         contract.status == 0
           ? "red"
-          : contract.status == "1"
+          : contract.status < contract.countOfProduct
           ? "blue"
           : "green",
     },
@@ -140,6 +140,7 @@ function AllContracts({ contracts }) {
   return (
     <Table
       className="components-table-demo-nested"
+      loading={loading}
       columns={columns}
       expandable={{ expandedRowRender }}
       dataSource={data}

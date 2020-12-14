@@ -20,6 +20,7 @@ router.get("/get-all", async (req, res) => {
     })
   }
 })
+
 router.get("/get/:id", async (req, res) => {
   try {
     const { id } = req.params
@@ -30,6 +31,34 @@ router.get("/get/:id", async (req, res) => {
     }
 
     return res.json(client)
+  } catch (e) {
+    res.status(500).json({
+      error: e.message,
+      message: "Сталася помилка. Спробуйте знову.",
+    })
+  }
+})
+
+router.get("/get-name/:name", async (req, res) => {
+  try {
+    const { name } = req.params
+    const clients = await Client.findAll()
+
+    if (!clients) {
+      return res.status(404).json({ message: "Клієнта не знайдено." })
+    }
+
+    const filterClients = clients.filter(client => {
+      if (client.name.toLowerCase().indexOf(name.toLowerCase()) == 0) {
+        return client
+      } else if (
+        client.lastName.toLowerCase().indexOf(name.toLowerCase()) == 0
+      ) {
+        return client
+      }
+    })
+
+    return res.json(filterClients)
   } catch (e) {
     res.status(500).json({
       error: e.message,

@@ -33,7 +33,7 @@ function AddNewContainer({ refresh }) {
       </Form.Item>
 
       <Form.Item
-        label="Ціна"
+        label="Ціна в грн."
         name="price"
         rules={[{ required: true, message: "Введіть ціну!" }]}
       >
