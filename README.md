@@ -18,4 +18,4 @@
 
 ## My app has benn deployed on Heroku
 
-#You can view my app at [ware-house-kondratyk.herokuapp.com](https://ware-house-kondratyk.herokuapp.com/)
+# You can view my app at [ware-house-kondratyk.herokuapp.com](https://ware-house-kondratyk.herokuapp.com/)
