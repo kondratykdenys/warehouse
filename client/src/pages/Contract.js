@@ -55,42 +55,44 @@ function Contract({ match }) {
           style={{ width: 600, margin: "auto" }}
           title={`Контакт номер: ${contract.id}`}
         >
-          <p>
-            <span>Клієнт: </span>
-            {contract.client && contract.client.name
-              ? `${contract.client.name} ${contract.client.lastName}`
-              : "Клієнта видаленно"}
-          </p>
-          <p>
-            <span>Дата заключення контракту: </span> {contract.dateOfAssebly}
-          </p>
-          <p>
-            <span>Продукт:</span>
-            {contract.product && contract.product.name
-              ? `${contract.product.name} ${contract.product.price}`
-              : "Продукт видаленно"}
-          </p>
-          <p>
-            <span>Кількість: </span>
-            {contract.countOfProduct}
-          </p>
-          <p>
-            <span>Статус: </span>
-            <Progress
-              strokeColor={{
-                "0%": "#108ee9",
-                "100%": "#87d068",
-              }}
-              style={{ width: "85%" }}
-              percent={(contract.status * 100) / contract.countOfProduct}
-            />
-          </p>
-          <p>
-            <span>Тара: </span>
-            {contract.ttn && contract.ttn.name
-              ? `${contract.ttn.name} ${contract.ttn.price}`
-              : "Тару видаленно"}
-          </p>
+          <div>
+            <p>
+              <span>Клієнт: </span>
+              {contract.client && contract.client.name
+                ? `${contract.client.name} ${contract.client.lastName}`
+                : "Клієнта видаленно"}
+            </p>
+            <p>
+              <span>Дата заключення контракту: </span> {contract.dateOfAssebly}
+            </p>
+            <p>
+              <span>Продукт:</span>
+              {contract.product && contract.product.name
+                ? `${contract.product.name} ${contract.product.price}`
+                : "Продукт видаленно"}
+            </p>
+            <p>
+              <span>Кількість: </span>
+              {contract.countOfProduct}
+            </p>
+            <p>
+              <span>Статус: </span>
+              <Progress
+                strokeColor={{
+                  "0%": "#108ee9",
+                  "100%": "#87d068",
+                }}
+                style={{ width: "85%" }}
+                percent={(contract.status * 100) / contract.countOfProduct}
+              />
+            </p>
+            <p>
+              <span>Тара: </span>
+              {contract.ttn && contract.ttn.name
+                ? `${contract.ttn.name} ${contract.ttn.price}`
+                : "Тару видаленно"}
+            </p>
+          </div>
         </Card>
         <Table
           style={{ width: 500, margin: "50px auto" }}

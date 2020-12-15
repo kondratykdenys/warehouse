@@ -1,4 +1,7 @@
 import { useCallback, useState, useEffect } from "react"
+import Cookies from "universal-cookie"
+
+const cookies = new Cookies()
 
 const storageName = "userData"
 
@@ -10,12 +13,15 @@ export const useAuth = () => {
     setToken(jwtToken)
     setUserIsChief(isChief)
 
-    localStorage.setItem(
+    const expires = new Date(Date.now() + 3600000)
+
+    cookies.set(
       storageName,
       JSON.stringify({
         token: jwtToken,
         userIsChief: isChief,
-      })
+      }),
+      { path: "/", expires: expires }
     )
   }, [])
 
@@ -23,11 +29,11 @@ export const useAuth = () => {
     setToken(null)
     setUserIsChief(null)
 
-    localStorage.removeItem(storageName)
+    cookies.remove(storageName)
   }, [])
 
   useEffect(() => {
-    const data = JSON.parse(localStorage.getItem(storageName))
+    const data = cookies.get(storageName)
 
     if (data && data.token) {
       login(data.token, data.userIsChief)
