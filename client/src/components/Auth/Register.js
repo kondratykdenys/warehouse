@@ -8,18 +8,17 @@ import styles from "./Auth.module.scss"
 
 function Register() {
   const auth = useContext(AuthContext)
-  const { loading, request, clearError, error } = useHttp()
+  const { loading, request, error } = useHttp()
 
   const message = useMessage()
 
   useEffect(() => {
     message(error)
-    clearError()
   }, [message, error])
 
   const onFinish = async values => {
     try {
-      const data = await request("/api/auth/register", "POST", { ...values })
+      await request("/api/auth/register", "POST", { ...values })
       auth.login(data.token, data.userIsChief)
     } catch (e) {}
   }

@@ -1,14 +1,21 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { useHttp } from "../../hooks/http.hook"
+import { useMessage } from "../../hooks/message.hook"
 import { Form, Input, Button, Space } from "antd"
 
 function AddNewClient({ refresh }) {
   const [showAddNewClient, setShowAddNewClient] = useState(false)
-  const { loading, request, error, clearError } = useHttp()
+  const { loading, request, error } = useHttp()
+
+  const message = useMessage()
+
+  useEffect(() => {
+    message(error)
+  }, [message, error])
 
   const onFinish = async values => {
     try {
-      const data = await request("/api/client/add", "POST", { ...values })
+      await request("/api/client/add", "POST", { ...values })
       refresh()
     } catch (e) {}
   }
@@ -16,6 +23,7 @@ function AddNewClient({ refresh }) {
   const handlerSetShowAddNewProduct = () => {
     setShowAddNewClient(!showAddNewClient)
   }
+
 
   return !showAddNewClient ? (
     <Button className="addNew" onClick={handlerSetShowAddNewProduct}>

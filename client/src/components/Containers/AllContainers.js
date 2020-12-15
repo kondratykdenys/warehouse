@@ -2,7 +2,12 @@ import React, { useEffect, useState } from "react"
 import { NavLink } from "react-router-dom"
 import { Table, Tag, Space, Alert } from "antd"
 
-function AllContainers({ removeById, containers, refresh, userIsChief }) {
+function AllContainers({
+  removeById,
+  containers,
+  userIsChief,
+  loading,
+}) {
   const columns = [
     {
       title: "Назва",
@@ -44,7 +49,12 @@ function AllContainers({ removeById, containers, refresh, userIsChief }) {
   }))
 
   return (
-    <Table columns={columns} dataSource={data} pagination={{ pageSize: 10 }} />
+    <Table
+      loading={loading}
+      columns={columns}
+      dataSource={data}
+      pagination={{ pageSize: 10 }}
+    />
   )
 }
 

@@ -8,7 +8,7 @@ import AddNewContract from "../components/Contracts/AddNewContract"
 function Contracts() {
   const { userIsChief } = useContext(AuthContext)
   const [contracts, setContracts] = useState([])
-  const { loading, request, error, clearError } = useHttp()
+  const { loading, request, error } = useHttp()
 
   const message = useMessage()
 
@@ -23,7 +23,6 @@ function Contracts() {
 
   useEffect(() => {
     message(error)
-    clearError()
   }, [message, error])
 
   return (

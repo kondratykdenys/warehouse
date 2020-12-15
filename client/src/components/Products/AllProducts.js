@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { NavLink } from "react-router-dom"
 import { Table } from "antd"
 
-function AllProducts({ products, userIsChief }) {
+function AllProducts({ products, userIsChief, loading, removeById }) {
   const columns = [
     {
       title: "Назва",
@@ -44,7 +44,12 @@ function AllProducts({ products, userIsChief }) {
   }))
 
   return (
-    <Table columns={columns} dataSource={data} pagination={{ pageSize: 10 }} />
+    <Table
+      loading={loading}
+      columns={columns}
+      dataSource={data}
+      pagination={{ pageSize: 10 }}
+    />
   )
 }
 

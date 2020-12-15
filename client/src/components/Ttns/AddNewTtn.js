@@ -1,14 +1,21 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { useHttp } from "../../hooks/http.hook"
+import { useMessage } from "../../hooks/message.hook"
 import { Form, Input, Button, Space, AutoComplete } from "antd"
 const { Option } = AutoComplete
 
 function AddNewTtn({ refresh }) {
   const [showAddNewTtn, setShowAddNewTtn] = useState(false)
-  const { loading, request, error, clearError } = useHttp()
+  const { loading, request, error } = useHttp()
 
   const [relustContract, setResultContract] = useState([])
   const [contract, setContract] = useState(null)
+
+  const message = useMessage()
+
+  useEffect(() => {
+    message(error)
+  }, [message, error])
 
   const onFinish = async values => {
     try {

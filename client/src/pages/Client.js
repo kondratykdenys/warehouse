@@ -11,7 +11,7 @@ const { Meta } = Card
 function Client({ match }) {
   const { userIsChief } = useContext(AuthContext)
   const [client, setClient] = useState([])
-  const { loading, request, error, clearError } = useHttp()
+  const { loading, request, error } = useHttp()
 
   const message = useMessage()
   const history = useHistory()
@@ -22,7 +22,6 @@ function Client({ match }) {
 
   useEffect(() => {
     message(error)
-    clearError()
   }, [message, error])
 
   const refresh = async () => {

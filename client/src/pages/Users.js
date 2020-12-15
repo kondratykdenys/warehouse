@@ -6,7 +6,7 @@ import "./table.scss"
 
 function Users() {
   const [users, setUsers] = useState([])
-  const { loading, request, error, clearError } = useHttp()
+  const { loading, request, error } = useHttp()
 
   const message = useMessage()
 
@@ -16,7 +16,6 @@ function Users() {
 
   useEffect(() => {
     message(error)
-    clearError()
   }, [message, error])
 
   const refresh = async () => {
@@ -27,7 +26,7 @@ function Users() {
   return (
     <div className="table">
       <h1>Працівники</h1>
-      <AllUsers users={users} refresh={refresh} />
+      <AllUsers loading={loading} users={users} refresh={refresh} />
     </div>
   )
 }

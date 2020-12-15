@@ -9,7 +9,7 @@ import "./table.scss"
 function Containers() {
   const { userIsChief } = useContext(AuthContext)
   const [containers, setContainers] = useState([])
-  const { loading, request, error, clearError } = useHttp()
+  const { loading, request, error } = useHttp()
 
   const message = useMessage()
 
@@ -19,7 +19,6 @@ function Containers() {
 
   useEffect(() => {
     message(error)
-    clearError()
   }, [message, error])
 
   const refresh = async () => {
@@ -37,9 +36,9 @@ function Containers() {
       <h1>Тара</h1>
       {userIsChief ? <AddNewContainer refresh={refresh} /> : ""}
       <AllContainers
+        loading={loading}
         removeById={removeById}
         containers={containers}
-        refresh={refresh}
         userIsChief={userIsChief}
       />
     </div>

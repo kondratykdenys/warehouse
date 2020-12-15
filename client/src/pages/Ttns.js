@@ -10,7 +10,7 @@ import AllTtns from "../components/Ttns/AllTtns"
 function Ttns() {
   const { userIsChief } = useContext(AuthContext)
   const [ttns, setTtns] = useState([])
-  const { loading, request, error, clearError } = useHttp()
+  const { loading, request, error } = useHttp()
 
   const message = useMessage()
 
@@ -20,7 +20,6 @@ function Ttns() {
 
   useEffect(() => {
     message(error)
-    clearError()
   }, [message, error])
 
   const refresh = async () => {
@@ -32,7 +31,7 @@ function Ttns() {
     <div className="table">
       <h1>Товарні накладні</h1>
       {userIsChief ? <AddNewTtn refresh={refresh} /> : ""}
-      <AllTtns ttns={ttns} refresh={refresh} />
+      <AllTtns loading={loading} ttns={ttns} refresh={refresh} />
     </div>
   )
 }

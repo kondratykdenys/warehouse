@@ -9,7 +9,7 @@ import "./table.scss"
 function Clients() {
   const { userIsChief } = useContext(AuthContext)
   const [clients, setClients] = useState([])
-  const { loading, request, error, clearError } = useHttp()
+  const { loading, request, error } = useHttp()
 
   const message = useMessage()
 
@@ -19,7 +19,6 @@ function Clients() {
 
   useEffect(() => {
     message(error)
-    clearError()
   }, [message, error])
 
   const refresh = async () => {
@@ -37,9 +36,9 @@ function Clients() {
       <h1>Клієнти</h1>
       {userIsChief ? <AddNewClient refresh={refresh} /> : ""}
       <AllClients
+        loading={loading}
         removeById={removeById}
         clients={clients}
-        refresh={refresh}
         userIsChief={userIsChief}
       />
     </div>

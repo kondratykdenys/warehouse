@@ -1,14 +1,21 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { useHttp } from "../../hooks/http.hook"
+import { useMessage } from "../../hooks/message.hook"
 import { Form, Input, Button, Space } from "antd"
 
 function AddNewProduct({ refresh }) {
   const [showAddNewProduct, setShowAddNewProduct] = useState(false)
-  const { loading, request, error, clearError } = useHttp()
+  const { loading, request, error } = useHttp()
+
+  const message = useMessage()
+
+  useEffect(() => {
+    message(error)
+  }, [message, error])
 
   const onFinish = async values => {
     try {
-      const data = await request("/api/product/add", "POST", { ...values })
+      await request("/api/product/add", "POST", { ...values })
       refresh()
     } catch (e) {}
   }

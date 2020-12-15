@@ -9,7 +9,7 @@ import "./table.scss"
 function Products() {
   const { userIsChief } = useContext(AuthContext)
   const [products, setProducts] = useState([])
-  const { loading, request, error, clearError } = useHttp()
+  const { loading, request, error } = useHttp()
 
   const message = useMessage()
 
@@ -19,7 +19,6 @@ function Products() {
 
   useEffect(() => {
     message(error)
-    clearError()
   }, [message, error])
 
   const refresh = async () => {
@@ -37,6 +36,7 @@ function Products() {
       <h1>Товари</h1>
       {userIsChief ? <AddNewProduct refresh={refresh} /> : ""}
       <AllProducts
+        loading={loading}
         removeById={removeById}
         products={products}
         refresh={refresh}

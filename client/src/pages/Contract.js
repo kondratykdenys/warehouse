@@ -2,21 +2,20 @@ import React, { useState, useEffect, createRef } from "react"
 import ReactToPdf from "react-to-pdf"
 import { useHttp } from "../hooks/http.hook"
 import { useMessage } from "../hooks/message.hook"
-import { Button, Table, Card, Alert, Progress } from "antd"
+import { Button, Table, Card, Alert, Progress, Spin } from "antd"
 import { DownloadOutlined } from "@ant-design/icons"
 
 const ref = createRef()
 
 function Contract({ match }) {
   const [contract, setContract] = useState()
-  const { loading, request, error, clearError } = useHttp()
+  const { loading, request, error } = useHttp()
 
   const message = useMessage()
 
   const refresh = async () => {
     const newData = await request(`/api/contract/get/${match.params.id}`)
     setContract(newData)
-    console.log(newData)
   }
 
   useEffect(() => {
@@ -52,6 +51,7 @@ function Contract({ match }) {
     <div className={"table"} style={{ width: "900px", margin: "0 auto" }}>
       <div style={{ margin: 50 }} ref={ref}>
         <Card
+          loading={loading}
           style={{ width: 600, margin: "auto" }}
           title={`Контакт номер: ${contract.id}`}
         >
@@ -75,7 +75,7 @@ function Contract({ match }) {
               <span>Кількість: </span>
               {contract.countOfProduct}
             </p>
-            <p>
+            <div style={{marginBottom: 10}}>
               <span>Статус: </span>
               <Progress
                 strokeColor={{
@@ -83,9 +83,9 @@ function Contract({ match }) {
                   "100%": "#87d068",
                 }}
                 style={{ width: "85%" }}
-                percent={(contract.status * 100) / contract.countOfProduct}
+                percent={parseInt((contract.status * 100) / contract.countOfProduct)}
               />
-            </p>
+            </div>
             <p>
               <span>Тара: </span>
               {contract.ttn && contract.ttn.name
@@ -95,6 +95,7 @@ function Contract({ match }) {
           </div>
         </Card>
         <Table
+          loading={loading}
           style={{ width: 500, margin: "50px auto" }}
           columns={columns}
           dataSource={data}
@@ -115,13 +116,10 @@ function Contract({ match }) {
       </ReactToPdf>
     </div>
   ) : (
-    <Alert
-      message={error}
-      type="error"
-      onClose={clearError}
-      showIcon
-      closable
-    />
+    error ?
+      <Alert message={error} type="error" showIcon closable />
+      :
+      <Spin size="large" style={{margin: '50px px auto', display: 'block'}}/>
   )
 }
 

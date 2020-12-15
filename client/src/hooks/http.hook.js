@@ -17,7 +17,9 @@ export const useHttp = () => {
         const data = await response.json()
 
         if (!response.ok) {
-          throw new Error(data.message || "Сталася помилка")
+          throw new Error(
+            data.message || "Сталася помилка з сервером. Спробуйте пізніше."
+          )
         }
 
         setLoading(false)
@@ -26,6 +28,7 @@ export const useHttp = () => {
       } catch (e) {
         setLoading(false)
         serError(e.message)
+        setTimeout(clearError, 1000 * 3)
         throw e
       }
     },
@@ -34,5 +37,5 @@ export const useHttp = () => {
 
   const clearError = () => serError(false)
 
-  return { loading, request, error, clearError }
+  return { loading, request, error }
 }

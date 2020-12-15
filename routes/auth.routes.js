@@ -11,8 +11,11 @@ const router = Router()
 router.post(
   "/register",
   [
+
+    check("name", "Мінімальна довжина імені 4 символів.").isLength({ min: 4,}),
+    check("lastName", "Мінімальна довжина прізвища 4 символів.").isLength({ min: 4,}),
     check("email", "Неправильний Email").isEmail(),
-    check("password", "Мінімальна довжина пароля 6 символів").isLength({
+    check("password", "Мінімальна довжина пароля 6 символів.").isLength({
       min: 6,
     }),
   ],
@@ -23,7 +26,7 @@ router.post(
       if (!errors.isEmpty()) {
         return res
           .status(400)
-          .json({ errors, message: "Некоректні данні при реєстрації" })
+          .json({ message: errors.errors[0].msg || "Некоректні данні при реєстрації" })
       }
 
       const { name, lastName, email, password } = req.body
@@ -58,7 +61,7 @@ router.post(
     } catch (e) {
       res.status(500).json({
         error: e.message,
-        message: "Сталася помилка. Спробуйте знову.",
+        message: "Сталася помилка з сервером. Спробуйте пізніше.",
       })
     }
   }
@@ -80,7 +83,7 @@ router.post(
       if (!errors.isEmpty()) {
         return res
           .status(400)
-          .json({ errors, message: "Некоректні данні при авторизації" })
+          .json({ errors, message: errors.errors[0].msg || "Некоректні данні при авторизації" })
       }
 
       const { email, password } = req.body
@@ -88,13 +91,13 @@ router.post(
       const user = await User.findOne({ where: { email } })
 
       if (!user) {
-        return res.json(400).json({ message: "Користувача не знайдено" })
+        return res.status(400).json({ message: "Користувача не знайдено" })
       }
 
       const isMatch = await bcrypt.compare(password, user.password)
 
       if (!isMatch) {
-        return res.json(400).json({ message: "Неправильний пароль" })
+        return res.status(400).json({ message: "Не правильний пароль" })
       }
 
       const token = jwt.sign(
@@ -110,7 +113,7 @@ router.post(
     } catch (e) {
       res.status(500).json({
         error: e.message,
-        message: "Сталася помилка. Спробуйте знову.",
+        message: "Сталася помилка з сервером. Спробуйте пізніше.",
       })
     }
   }

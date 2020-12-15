@@ -11,7 +11,7 @@ const { Meta } = Card
 function Product({ match }) {
   const { userIsChief } = useContext(AuthContext)
   const [product, setProduct] = useState([])
-  const { loading, request, error, clearError } = useHttp()
+  const { loading, request, error } = useHttp()
 
   const message = useMessage()
   const history = useHistory()
@@ -22,7 +22,6 @@ function Product({ match }) {
 
   useEffect(() => {
     message(error)
-    clearError()
   }, [message, error])
 
   const refresh = async () => {

@@ -1,14 +1,21 @@
 import React, { useEffect, useState } from "react"
 import { useHttp } from "../../hooks/http.hook"
+import { useMessage } from "../../hooks/message.hook"
 import { Table, Tag, Space, Alert, Checkbox } from "antd"
 
-function AllUsers({ users, refresh }) {
-  const { loading, request } = useHttp()
+function AllUsers({ users, refresh, loading }) {
+  const { request, error } = useHttp()
 
   const updateUser = async id => {
     const newData = await request(`/api/user/update/${id}`, "POST")
     refresh()
   }
+
+  const message = useMessage()
+
+  useEffect(() => {
+    message(error)
+  }, [message, error])
 
   const columns = [
     {
@@ -46,7 +53,12 @@ function AllUsers({ users, refresh }) {
   }))
 
   return (
-    <Table columns={columns} dataSource={data} pagination={{ pageSize: 10 }} />
+    <Table
+      loading={loading}
+      columns={columns}
+      dataSource={data}
+      pagination={{ pageSize: 10 }}
+    />
   )
 }
 

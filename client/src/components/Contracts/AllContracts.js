@@ -33,7 +33,14 @@ function AllContracts({ contracts, loading }) {
         })
       )
     }
-    return <Table columns={columns} dataSource={data} pagination={false} />
+    return (
+      <Table
+        loading={loading}
+        columns={columns}
+        dataSource={data}
+        pagination={false}
+      />
+    )
   }
 
   const columns = [

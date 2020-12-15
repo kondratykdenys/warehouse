@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { NavLink } from "react-router-dom"
 import { Table } from "antd"
 
-function AllTtns({ ttns, userIsChief }) {
+function AllTtns({ ttns, userIsChief, loading }) {
   const columns = [
     {
       title: "Контракт",
@@ -40,7 +40,7 @@ function AllTtns({ ttns, userIsChief }) {
     }
   })
 
-  return <Table dataSource={data} columns={columns} />
+  return <Table loading={loading} dataSource={data} columns={columns} />
 }
 
 export default AllTtns

@@ -1,12 +1,19 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { useHttp } from "../../hooks/http.hook"
+import { useMessage } from "../../hooks/message.hook"
 import { Form, Input, Button, Space, AutoComplete } from "antd"
 import { UserOutlined } from "@ant-design/icons"
 const { Option } = AutoComplete
 
 function AddNewContract({ refresh }) {
   const [showAddNewContract, setShowAddNewContract] = useState(false)
-  const { loading, request, error, clearError } = useHttp()
+  const { loading, request, error } = useHttp()
+
+  const message = useMessage()
+
+  useEffect(() => {
+    message(error)
+  }, [message, error])
 
   const [relustClients, setResultClinets] = useState([])
   const [relustProducts, setResultProducts] = useState([])
