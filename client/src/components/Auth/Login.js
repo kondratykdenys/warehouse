@@ -18,7 +18,7 @@ function Register() {
 
   const onFinish = async values => {
     try {
-      await request("/api/auth/login", "POST", { ...values })
+      const data = await request("/api/auth/login", "POST", { ...values })
       auth.login(data.token, data.userIsChief)
     } catch (e) {}
   }
