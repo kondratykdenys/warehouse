@@ -101,6 +101,44 @@ router.get("/get-query/:query", async (req, res) => {
   }
 })
 
+router.get("/get/:id", async (req, res) => {
+  try {
+    const { id } = req.params
+
+    const contract = await Contract.findOne({
+      where: {id},
+      include: [
+        {
+          model: Client,
+          as: "client",
+        },
+        {
+          model: Product,
+          as: "product",
+        },
+        {
+          model: Container,
+        },
+        {
+          model: Ttn,
+          as: "ttn",
+        },
+      ],
+    })
+
+    if (!contract) {
+      return res.status(404).json({ message: "Контракт не існує." })
+    }
+
+    return res.json(contract)
+  } catch (e) {
+    res.status(500).json({
+      error: e.message,
+      message: "Сталася помилка. Спробуйте знову.",
+    })
+  }
+})
+
 router.post("/add", async (req, res) => {
   try {
     const body = req.body

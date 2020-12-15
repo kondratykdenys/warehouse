@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { NavLink } from "react-router-dom"
-import { Table, Badge, Menu, Dropdown, Space, Tag } from "antd"
-import { DownOutlined } from "@ant-design/icons"
+import { Table, Progress } from "antd"
 
 function AllContracts({ contracts, loading }) {
   const expandedRowRender = contract => {
@@ -75,7 +74,15 @@ function AllContracts({ contracts, loading }) {
       dataIndex: "status",
       key: "status",
       render: status => (
-        <span>{<Tag color={status.color}>{status.name}</Tag>}</span>
+        <Progress
+          strokeColor={{
+            "0%": "#108ee9",
+            "100%": "#87d068",
+          }}
+          style={{ width: 150 }}
+          percent={status.percent}
+          status={status.percent < 100 ? "active" : ""}
+        />
       ),
     },
     {
@@ -89,6 +96,14 @@ function AllContracts({ contracts, loading }) {
           )
         return <span>{container.name}</span>
       },
+    },
+    {
+      title: "Дія",
+      dataIndex: "pdf",
+      key: "pdf",
+      render: (text, render) => (
+        <NavLink to={`contract/${render.id}`}>Більше</NavLink>
+      ),
     },
   ]
 
@@ -122,18 +137,7 @@ function AllContracts({ contracts, loading }) {
       link: contract.Container && contract.Container.name ? true : false,
     },
     status: {
-      name:
-        contract.status == 0
-          ? "Не виконано"
-          : contract.status < contract.countOfProduct
-          ? "В процесі"
-          : "Виконанно",
-      color:
-        contract.status == 0
-          ? "red"
-          : contract.status < contract.countOfProduct
-          ? "blue"
-          : "green",
+      percent: (contract.status * 100) / contract.countOfProduct,
     },
   }))
 

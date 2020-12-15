@@ -5,6 +5,7 @@ import AuthPage from "./pages/AuthPage"
 import Clients from "./pages/Clients"
 import Client from "./pages/Client"
 import Contracts from "./pages/Contracts"
+import Contract from "./pages/Contract"
 import Ttns from "./pages/Ttns"
 import Products from "./pages/Products"
 import Product from "./pages/Product"
@@ -22,6 +23,7 @@ export const useRoutes = (isAuthenticated, userIsChief) => {
           <Route path="/clients" component={Clients} />
           <Route path="/client/:id" component={Client} exect />
           <Route path="/contracts" component={Contracts} />
+          <Route path="/contract/:id" component={Contract} />
           <Route path="/ttns" component={Ttns} />
           <Route path="/products" component={Products} />
           <Route path="/product/:id" component={Product} exact />

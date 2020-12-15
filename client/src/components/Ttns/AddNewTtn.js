@@ -69,7 +69,8 @@ function AddNewTtn({ refresh }) {
       </Form.Item>
       {contract ? (
         <React.Fragment>
-          <p>{`${contract.id}, 
+          <p>
+            {`${contract.id}, 
                клієнт: ${contract.client.name} ${contract.client.lastName} 
                Прокукт: ${contract.product.name}
                 ...
