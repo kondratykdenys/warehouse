@@ -2,12 +2,7 @@ import React, { useEffect, useState } from "react"
 import { NavLink } from "react-router-dom"
 import { Table, Tag, Space, Alert } from "antd"
 
-function AllContainers({
-  removeById,
-  containers,
-  userIsChief,
-  loading,
-}) {
+function AllContainers({ removeById, containers, userIsChief, loading }) {
   const columns = [
     {
       title: "Назва",

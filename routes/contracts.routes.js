@@ -74,19 +74,20 @@ router.get("/get-query/:query", async (req, res) => {
     const filteredContracts = contracts.filter(contract => {
       if (
         (contract.id == query ||
-        (contract.client &&
-          contract.client.name &&
-          contract.client.name.toLowerCase().indexOf(query) === 0) ||
-        (contract.client &&
-          contract.client.lastName &&
-          contract.client.lastName.toLowerCase().indexOf(query) === 0) ||
-        (contract.product &&
-          contract.product.name &&
-          contract.product.name.toLowerCase().indexOf(query) === 0) ||
-        (contract.Container &&
-          contract.Container.name &&
-          contract.Container.name.toLowerCase().indexOf(query) === 0) ||
-        contract.dateOfAssebly.indexOf(query) === 0) && contract.countOfProduct > contract.status
+          (contract.client &&
+            contract.client.name &&
+            contract.client.name.toLowerCase().indexOf(query) === 0) ||
+          (contract.client &&
+            contract.client.lastName &&
+            contract.client.lastName.toLowerCase().indexOf(query) === 0) ||
+          (contract.product &&
+            contract.product.name &&
+            contract.product.name.toLowerCase().indexOf(query) === 0) ||
+          (contract.Container &&
+            contract.Container.name &&
+            contract.Container.name.toLowerCase().indexOf(query) === 0) ||
+          contract.dateOfAssebly.indexOf(query) === 0) &&
+        contract.countOfProduct > contract.status
       ) {
         return contract
       }
@@ -106,7 +107,7 @@ router.get("/get/:id", async (req, res) => {
     const { id } = req.params
 
     const contract = await Contract.findOne({
-      where: {id},
+      where: { id },
       include: [
         {
           model: Client,

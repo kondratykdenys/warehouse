@@ -11,9 +11,10 @@ const router = Router()
 router.post(
   "/register",
   [
-
-    check("name", "Мінімальна довжина імені 4 символів.").isLength({ min: 4,}),
-    check("lastName", "Мінімальна довжина прізвища 4 символів.").isLength({ min: 4,}),
+    check("name", "Мінімальна довжина імені 4 символів.").isLength({ min: 4 }),
+    check("lastName", "Мінімальна довжина прізвища 4 символів.").isLength({
+      min: 4,
+    }),
     check("email", "Неправильний Email").isEmail(),
     check("password", "Мінімальна довжина пароля 6 символів.").isLength({
       min: 6,
@@ -24,9 +25,9 @@ router.post(
       const errors = validationResult(req)
 
       if (!errors.isEmpty()) {
-        return res
-          .status(400)
-          .json({ message: errors.errors[0].msg || "Некоректні данні при реєстрації" })
+        return res.status(400).json({
+          message: errors.errors[0].msg || "Некоректні данні при реєстрації",
+        })
       }
 
       const { name, lastName, email, password } = req.body
@@ -81,9 +82,10 @@ router.post(
       const errors = validationResult(req)
 
       if (!errors.isEmpty()) {
-        return res
-          .status(400)
-          .json({ errors, message: errors.errors[0].msg || "Некоректні данні при авторизації" })
+        return res.status(400).json({
+          errors,
+          message: errors.errors[0].msg || "Некоректні данні при авторизації",
+        })
       }
 
       const { email, password } = req.body

@@ -1,7 +1,11 @@
 # I have created a full stack application.
-****
+
+---
+
 ### I have used the following technology stack:
+
 ##### Backend
+
 - NodeJs
 - Express
 - Express-validator
@@ -10,6 +14,7 @@
 - JsonWebToken
 
 ##### Frontend
+
 - React
 - React-router-dom
 - React hooks

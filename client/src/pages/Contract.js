@@ -75,7 +75,7 @@ function Contract({ match }) {
               <span>Кількість: </span>
               {contract.countOfProduct}
             </p>
-            <div style={{marginBottom: 10}}>
+            <div style={{ marginBottom: 10 }}>
               <span>Статус: </span>
               <Progress
                 strokeColor={{
@@ -83,7 +83,9 @@ function Contract({ match }) {
                   "100%": "#87d068",
                 }}
                 style={{ width: "85%" }}
-                percent={parseInt((contract.status * 100) / contract.countOfProduct)}
+                percent={parseInt(
+                  (contract.status * 100) / contract.countOfProduct
+                )}
               />
             </div>
             <p>
@@ -110,16 +112,15 @@ function Contract({ match }) {
             type={"link"}
             onClick={toPdf}
           >
-            Скачать в pdf
+            Завантажити в pdf
           </Button>
         )}
       </ReactToPdf>
     </div>
+  ) : error ? (
+    <Alert message={error} type="error" showIcon closable />
   ) : (
-    error ?
-      <Alert message={error} type="error" showIcon closable />
-      :
-      <Spin size="large" style={{margin: '50px px auto', display: 'block'}}/>
+    <Spin size="large" style={{ margin: "50px px auto", display: "block" }} />
   )
 }
 

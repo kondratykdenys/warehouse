@@ -24,7 +24,6 @@ function AddNewClient({ refresh }) {
     setShowAddNewClient(!showAddNewClient)
   }
 
-
   return !showAddNewClient ? (
     <Button className="addNew" onClick={handlerSetShowAddNewProduct}>
       Додати нового клієнта
